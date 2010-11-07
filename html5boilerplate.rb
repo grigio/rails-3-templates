@@ -7,7 +7,7 @@ run 'mv public/index.html public/test-rails3.html'
 # Install JQuery
 inside "public/javascripts" do
   FileUtils.rm_rf %w(controls.js dragdrop.js effects.js prototype.js rails.js)
-  get "http://github.com/rails/jquery-ujs/raw/master/src/rails.js", "rails.js"
+  run "wget https://github.com/rails/jquery-ujs/raw/master/src/rails.js --no-check-certificate"
 end
 
 # Install HTML5-Boilerplate
@@ -17,11 +17,12 @@ inside "public" do
 
   run 'cp html5-boilerplate/* . -R'
   run 'mv js/* javascripts/'
+  run 'mv javascripts/libs/* javascripts/'
   run 'mv css/* stylesheets/'
   run 'rm -Rf js css html5-boilerplate'
   run 'mv index.html example-html5b.html'
   inside "javascripts" do
-    run "mv jquery-* jquery.js"
+    run "mv jquery-*.min.js jquery.js"
     run "mv modernizr-* modernizr.js"  
   end
   
